@@ -1,0 +1,49 @@
+{% comment %} 
+
+<nav aria-label="Page navigation example">
+  <ul class="pagination justify-content-end">
+    <li class="page-item disabled">
+      <a class="page-link" href="#" tabindex="-1">Previous</a>
+    </li>
+    <li class="page-item"><a class="page-link" href="#">1</a></li>
+    <li class="page-item"><a class="page-link" href="#">2</a></li>
+    <li class="page-item"><a class="page-link" href="#">3</a></li>
+    <li class="page-item">
+      <a class="page-link" href="#">Next</a>
+    </li>
+  </ul>
+</nav> {% endcomment %}
+
+
+
+
+
+<nav aria-label="Page navigation example">
+<ul class="pagination justify-content-end">
+
+    {%if is_paginated %}
+        
+        {%if page_obj.has_previous %}
+            <li class="page-item"><a class = "page-link" href = "?page=1">First</a><li> 
+           
+            <a class ="page-link" href = "?page={{page_obj.previous_page_number}}"> Previous </a>
+            
+
+        {%endif%}
+        {% for num in page_obj.paginator.page_range %}
+
+            {%if page_obj.number == num %}
+                <li class="page-item"><a class = "btn btn-info mb-4 active" href = "?page={{num}}">{{num}} </a></li>
+            {%elif num > page_obj.number|add:"-3" and num < page_obj.number|add:"3" %}
+                <li class="page-item"> <a class="btn btn-outline-info mb-4 page-link" href = "?page={{num}}"> {{ num }}</a></li>
+            {%endif%}
+
+        
+        {%endfor%}
+        {% if page_obj.has_next %}
+            <li class="page-item"> <a class = "page-link" href="?page={{page_obj.next_page_number}}"> Next </a> </li>
+        {%endif%}  
+    {%endif%}
+
+</ul>
+</nav>

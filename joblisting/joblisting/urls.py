@@ -18,10 +18,26 @@ from django.urls import path, include
 from django.conf.urls import url
 from django.conf.urls.static import static
 from django.conf import settings
+from forums.views import ForumViewSet
+from forums.models import Forum
+from rest_framework import routers, serializers, viewsets
+from forums.serializer import ForumSerializer
+
+
+router = routers.DefaultRouter()
+router.register(r'forums', ForumViewSet)
+class ForumViewSet(viewsets.ModelViewSet):
+    queryset = Forum.objects.all()
+    serializer_class = ForumSerializer
+
+
 
 urlpatterns = [
+    path('', include(router.urls)),
     path('admin/', admin.site.urls),
     
     path('account/', include('account.urls', namespace='account')),
-    path('forum/', include('forums.urls', namespace='forums'))
+    path('forum/', include('forums.urls', namespace='forums')),
+    
+    path('apiAuth/', include('rest_framework.urls', namespace='rest_framework'))
 ] + static(settings.STATIC_URL, document_root = settings.STATIC_ROOT)
