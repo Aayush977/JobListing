@@ -23,6 +23,7 @@
     <link rel="stylesheet" href="{% static 'joblisting/fonts/line-icons/style.css' %}">
     <link rel="stylesheet" href="{% static 'joblisting/css/owl.carousel.min.css' %}">
     <link rel="stylesheet" href="{% static 'joblisting/css/animate.min.css' %}">
+    
 
     <!-- MAIN CSS -->
     <link rel="stylesheet" href="{%static 'joblisting/css/style.css' %}">    
@@ -223,13 +224,23 @@
         <h2 class="section-title mb-2">43,167 Job Listed</h2>
       </div>
     </div>
+    <div id="app">
+
+
+    </div>
+    <div id="comment">
+    </div>
+
+    <div id="homePage">
+        
+    </div>
     {% for forum in forums %}
       
       <ul class="job-listings mb-5">
         <li class="job-listing d-block d-sm-flex pb-3 pb-sm-0 align-items-center">
           <a href= "{%url 'account:jobSingle' pk=forum.pk %}"></a>
           <div class="job-listing-logo">
-            <img src="{%static 'joblisting/images/job_logo_1.jpg' %}" class="img-fluid">
+            <img src="{%static 'frontend/images/job_logo_1.jpg' %}" class="img-fluid">
           </div>
 
           <div class="job-listing-about d-sm-flex custom-width w-100 justify-content-between mx-4">
@@ -258,7 +269,9 @@
 
     </div>
     </section>
-    {%include 'forum/pagination.html'%}
+    
+   {%include 'forum/pagination.html'%} 
+   
     <section class="py-5 bg-image overlay-primary fixed overlay" style="background-image: url('images/hero_1.jpg');">
       <div class="container">
         <div class="row align-items-center">
@@ -272,7 +285,7 @@
         </div>
       </div>
     </section>
-
+   
     
     <section class="site-section py-4">
       <div class="container">
@@ -315,7 +328,7 @@
         </div>
       </div>
     </section>
-
+    
 
     <section class="bg-light pt-5 testimony-full">
         
@@ -371,6 +384,7 @@
         </div>
       </div>
     </section>
+    
     
     <footer class="site-footer">
 
@@ -432,8 +446,11 @@
     </footer>
   
   </div>
-
+    <script src="{%static 'frontend/main.js' %}"></script>
     <!-- SCRIPTS -->
+    <script src ="{%static 'frontend/App.js'%}"> </script>
+    <script type ="text/babel" src ="frontend/src/components/Comment.js"> </script>
+
     <script src="{%static 'joblisting/js/jquery.min.js' %}"></script>
     <script src="{%static 'joblisting/js/bootstrap.bundle.min.js' %}"></script>
     <script src="{%static 'joblisting/js/isotope.pkgd.min.js' %}"></script>
@@ -446,9 +463,9 @@
     <script src="{%static 'joblisting/js/owl.carousel.min.js' %}"></script>
     
     <script src="{%static 'joblisting/js/bootstrap-select.min.js' %}"></script>
-    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.17.0/babel.min.js"></script>
     <script src="{%static 'joblisting/js/custom.js' %}"></script>
-
+    
      
   </body>
 </html> 

@@ -8,10 +8,8 @@ app_name = 'forums'
 urlpatterns = [
     
     path('', views.forums),
-    path('api/', views.ForumViewSet.as_view),
+    path('test/', views.test),
     path('post_job/', views.post_job, name='postJob'),
-    path('page/', postListView.as_view()),
-    
-    
-    
+    #path('page/', postListView.as_view()),
+  
 ]

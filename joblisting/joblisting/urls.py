@@ -14,30 +14,35 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path, include
+from django.urls import path, include, re_path
 from django.conf.urls import url
 from django.conf.urls.static import static
 from django.conf import settings
-from forums.views import ForumViewSet
-from forums.models import Forum
+from forums.views import ForumViewSet, CommentViewSet
+from forums.models import Forum, Comment
 from rest_framework import routers, serializers, viewsets
-from forums.serializer import ForumSerializer
+from forums.serializer import ForumSerializer, CommentSerializer
 
 
 router = routers.DefaultRouter()
-router.register(r'forums', ForumViewSet)
+
 class ForumViewSet(viewsets.ModelViewSet):
     queryset = Forum.objects.all()
     serializer_class = ForumSerializer
+class CommentViewSet(viewsets.ModelViewSet):
+    queryset = Comment.objects.all()
+    serializer_class = CommentSerializer
 
-
+router.register(r'forums', ForumViewSet)
+router.register(r'comment', CommentViewSet)
 
 urlpatterns = [
-    path('', include(router.urls)),
+    path('api/', include(router.urls)),
     path('admin/', admin.site.urls),
     
     path('account/', include('account.urls', namespace='account')),
     path('forum/', include('forums.urls', namespace='forums')),
     
-    path('apiAuth/', include('rest_framework.urls', namespace='rest_framework'))
+    path('apiAuth/', include('rest_framework.urls', namespace='rest_framework')),
+    re_path(r'^(?:.*)/?', include('frontend.urls'))
 ] + static(settings.STATIC_URL, document_root = settings.STATIC_ROOT)

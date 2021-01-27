@@ -14,22 +14,25 @@ from django.views.generic.list import ListView
 
 from rest_framework import viewsets
 from rest_framework.response import Response
-from  forums.serializer import ForumSerializer
-
+from  forums.serializer import ForumSerializer, CommentSerializer
+from rest_framework import status;
 
 class ForumViewSet(viewsets.ModelViewSet):
    
     queryset = Forum.objects.all()
     serializer_class = ForumSerializer
     serialized = ForumSerializer(queryset)
-    
-    
-    
 
+class CommentViewSet(viewsets.ModelViewSet):
+    queryset = Comment.objects.all()
+    serializer_class = CommentSerializer
+    
 
 def forums(request):
-    return render(request, 'portfolio.html')
+    return render(request, 'jobboard/portfolio.html')
 
+def test(request):
+    return render(request,'jobboard/post-job.html',{})
 @csrf_protect
 def post_job(request):
     
@@ -77,3 +80,4 @@ class postListView(ListView):
     context_object_name = "forums"
     template_name = "jobboard/index.html"
     paginate_by = 2
+

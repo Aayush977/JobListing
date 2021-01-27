@@ -4,14 +4,14 @@ from django.conf import settings
 from forums.views import postListView
 app_name = 'account'
 urlpatterns = [
-    #path('', views.index, name='index')
-    path('', postListView.as_view()),
-    path('about/', views.about, name ='aboutUs'),
-    path('signup/', views.signup, name ='signup'),
+    # path('', postListView.as_view()),
+    path('homepage/', views.index, name='index'),
+    path('about/', views.about, name='aboutUs'),
+    path('signup/', views.signup, name='signup'),
     path('login/', views.login, name='login'),
-    path('logout/',views.logout_view, name='logout'),
-    path('job-single/<int:pk>',views.jobsingle, name='jobSingle')
-    
+    path('logout/', views.logout_view, name='logout'),
+    path('job-single/<int:pk>', views.jobsingle, name='jobSingle')
+
     #path('posting/', views.post_job, name='posting')
 
 ]
