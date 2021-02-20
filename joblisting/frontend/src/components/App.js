@@ -48,6 +48,7 @@ class App extends Component {
                     <span className="badge badge-danger">{item.job_type}</span>
                   </div>
                 </div>
+                
               </li>
             </ul>
           </div>
