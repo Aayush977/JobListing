@@ -12,3 +12,8 @@ def index(request):
 
 def comment(request):
     return render(request,'jobboard/post-job.html')
+
+def  jobDetail(request):
+    return render(request,'jobboard/job-single.html')
+
+    

@@ -6,15 +6,14 @@ class ForumSerializer(serializers.ModelSerializer):
         model = Forum
         fields = ['user','title_ad', 'location', 'job_type', 'job_region', 'description', 'created_at']
 
-class ForumPostSerializer(serializers.ModelSerializer):
+
+class CreateForumSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Forum
-        fields = "__all__"
-
-
+        model=  Forum
+        fields = ['user', 'title_ad', 'location', 'job_type', 'job_region', 'description']
 
 class CommentSerializer(serializers.ModelSerializer):
 
     class Meta:
-        model = Comment
-        fields = ['desc']
+        model = Comment 
+        fields = "__all__"

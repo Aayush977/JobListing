@@ -3,6 +3,7 @@ from . import views
 app_name = 'frontend'
 urlpatterns = [
     path('', views.index),
-    path('comment', views.comment),
+    path('job',views.jobDetail),
     path('postJob',views.comment)
+    
 ]

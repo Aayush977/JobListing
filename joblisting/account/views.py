@@ -5,16 +5,9 @@ from django.http import HttpResponse
 from django.contrib import messages
 from django.contrib.auth import logout, authenticate, login as account_login
 # Create your views here.
-from account.forms import RegisterForm
+#from account.forms import RegisterForm
 from forums.models import Forum
 from django.views.generic.list import ListView
-
-
-class postListView(ListView):
-    model = Forum
-    context_object_name = "forums"
-    template_name = "jobboard/index.html"
-    paginate_by = 2
 
 
 

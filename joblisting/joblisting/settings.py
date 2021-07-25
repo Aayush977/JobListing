@@ -37,10 +37,14 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.forms',
     'account',
     'forums',
+    'frontend.apps.FrontendConfig',
+    'django_react_views',
     'rest_framework',
-    'frontend.apps.FrontendConfig'
+    'rest_framework.authtoken'
+    
 ]
 
 MIDDLEWARE = [
@@ -58,7 +62,7 @@ ROOT_URLCONF = 'joblisting.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, 'Templates'), 'Templates/jobboard'],
+        'DIRS':[os.path.join(BASE_DIR, 'templates'), 'Templates/jobboard'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -68,6 +72,7 @@ TEMPLATES = [
                 'django.contrib.messages.context_processors.messages',
             ],
         },
+        
     },
 ]
 
@@ -125,3 +130,9 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static')
 ]
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework.authentication.TokenAuthentication',
+    ),
+}
+FORM_RENDERER = 'django.forms.renderers.TemplatesSetting'

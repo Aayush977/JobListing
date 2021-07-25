@@ -1,6 +1,5 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from .models import Forum, Comment
-from .forms import createForum
 from django.contrib.auth.models import User
 from django.http import HttpResponse, HttpResponseRedirect
 from django.core.exceptions import ObjectDoesNotExist
@@ -11,14 +10,13 @@ from django.views.decorators.csrf import csrf_exempt
 from django.contrib.auth.decorators import login_required
 import json
 from django.views.generic.list import ListView
-
+from rest_framework.views import APIView
 from rest_framework import viewsets
 from rest_framework.response import Response
-from  forums.serializer import ForumSerializer, CommentSerializer
-from rest_framework import status;
+from forums.serializer import ForumSerializer, CreateForumSerializer, CommentSerializer
+from rest_framework import status
 
-class ForumViewSet(viewsets.ModelViewSet):
-   
+class ForumViewSet(viewsets.ModelViewSet):   
     queryset = Forum.objects.all()
     serializer_class = ForumSerializer
     serialized = ForumSerializer(queryset)
@@ -26,14 +24,42 @@ class ForumViewSet(viewsets.ModelViewSet):
 class CommentViewSet(viewsets.ModelViewSet):
     queryset = Comment.objects.all()
     serializer_class = CommentSerializer
-    
 
+class CreateForumSet(viewsets.ModelViewSet):
+    
+    serializer_class = CreateForumSerializer
+    
+    def post(self,request, format=None):
+        
+        if not self.request.session.exists(self.request.session.session_key):
+            self.request.session.create()
+        serializer = self.serializer_class(data = request.data)
+        if serializer.is_valid():
+        
+            user = serializer.data.get.user
+            title_ad = serializer.data.get.title_ad
+            location = serializer.data.get.location
+            job_type = serializer.data.get.job_type
+            job_region = serializer.data.get.job_region
+            description = serializer.data.get.description
+            print(user, title_ad, location, job_type, job_region)
+            queryset = Forum.objects.create(user,title_ad,location,job_type,job_region,description)
+            
+            queryset.save()
+    def get_queryset(self):
+            
+        return Forum.objects.all()
+    
+    
+        
+        
+        
 def forums(request):
     return render(request, 'jobboard/portfolio.html')
 
-def test(request):
-    return render(request,'jobboard/post-job.html',{})
-@csrf_protect
+def post_job(request):
+    return render(request,'jobboard/post-job.html')
+""" @csrf_protect
 def post_job(request):
     
     if request.method == "POST" and request.is_ajax():
@@ -56,7 +82,7 @@ def post_job(request):
             user_id.save()
             return render(request,'jobboard/post-job.html',{}) 
     else:    
-        return render(request,'jobboard/post-job.html', {})
+        return render(request,'jobboard/post-job.html', {}) """
 
 """ def paginator_list(request):
 
@@ -79,5 +105,5 @@ class postListView(ListView):
     model = Forum
     context_object_name = "forums"
     template_name = "jobboard/index.html"
-    paginate_by = 2
+    paginate_by = 2 
 

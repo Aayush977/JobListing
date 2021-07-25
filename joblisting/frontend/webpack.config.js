@@ -1,10 +1,19 @@
 const webpack = require("webpack");
 const path = require('path');
 module.exports = {
-    entry: "./src/index.js",
+    entry: 
+    {
+        main:"./src/components/App.js",
+        postJob: "./src/components/PostJob.js",
+        header:"./src/components/Header.js",
+        pagination:"./src/components/Pagination.js",
+        searchForm:"./src/components/SearchForm.js"
+    },
+    
+    
     output: {
         path: path.resolve(__dirname,"./static/frontend"),
-        filename: "main.js",
+        filename: "[name].js",
     },
     
     devServer: {

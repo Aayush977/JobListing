@@ -18,31 +18,27 @@ from django.urls import path, include, re_path
 from django.conf.urls import url
 from django.conf.urls.static import static
 from django.conf import settings
-from forums.views import ForumViewSet, CommentViewSet
+from forums.views import ForumViewSet, CreateForumSet
 from forums.models import Forum, Comment
 from rest_framework import routers, serializers, viewsets
-from forums.serializer import ForumSerializer, CommentSerializer
+from rest_framework.routers import DefaultRouter
 
-
-router = routers.DefaultRouter()
-
-class ForumViewSet(viewsets.ModelViewSet):
-    queryset = Forum.objects.all()
-    serializer_class = ForumSerializer
-class CommentViewSet(viewsets.ModelViewSet):
-    queryset = Comment.objects.all()
-    serializer_class = CommentSerializer
-
+from django.views.generic import TemplateView
+from django.views.decorators.csrf import csrf_exempt
+router = DefaultRouter()
 router.register(r'forums', ForumViewSet)
-router.register(r'comment', CommentViewSet)
-
+router.register(r'createForums', CreateForumSet, basename='createForm')
 urlpatterns = [
-    path('api/', include(router.urls)),
     path('admin/', admin.site.urls),
-    
+    path('api/', include(router.urls)),
     path('account/', include('account.urls', namespace='account')),
     path('forum/', include('forums.urls', namespace='forums')),
-    
     path('apiAuth/', include('rest_framework.urls', namespace='rest_framework')),
     re_path(r'^(?:.*)/?', include('frontend.urls'))
+
+    
 ] + static(settings.STATIC_URL, document_root = settings.STATIC_ROOT)
+
+
+    
+

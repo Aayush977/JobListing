@@ -1,4 +1,5 @@
 {%load static %}
+
 <!doctype html>
 <html lang="en">
   <head>
@@ -7,14 +8,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="" />
     <meta name="keywords" content="" />
+    <meta http-equiv='cache-control' content='no-cache'/>
+    <meta http-equiv='expires' content='0' />
+    <meta http-equiv='pragma' content='no-cache' />
     <meta name="author" content="Free-Template.co" />
     <link rel="shortcut icon" href="ftco-32x32.png">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    
-    <!--<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
-    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"> -->
-     
-  
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="{% static 'joblisting/css/custom-bs.css' %}">
     <link rel="stylesheet" href="{% static 'joblisting/css/jquery.fancybox.min.css' %}">
@@ -23,8 +22,10 @@
     <link rel="stylesheet" href="{% static 'joblisting/fonts/line-icons/style.css' %}">
     <link rel="stylesheet" href="{% static 'joblisting/css/owl.carousel.min.css' %}">
     <link rel="stylesheet" href="{% static 'joblisting/css/animate.min.css' %}">
+    <link rel="stylesheet" href="{% static 'frontend/css/pagination.css' %}">
+    <link rel="stylesheet" href="{%static 'frontend/css/searchform.css'%}">
+    <link rel="stylesheet" href="{%static 'frontend/css/app.css'%}">
     
-
     <!-- MAIN CSS -->
     <link rel="stylesheet" href="{%static 'joblisting/css/style.css' %}">    
   </head>
@@ -54,7 +55,7 @@
     <header class="site-navbar mt-3">
       <div class="container-fluid">
         <div class="row align-items-center">
-          <div class="site-logo col-6"><a href="index.html">JobBoard</a></div>
+          <div class="site-logo col-6"><a href="index.html">Jobs</a></div>
 
           <nav class="mx-auto site-navigation">
             <ul class="site-menu js-clone-nav d-none d-xl-block ml-0 pl-0">
@@ -114,7 +115,7 @@
 
     <!-- HOME -->
     <section class="home-section section-hero overlay bg-image" style="background-image: url('images/hero_1.jpg');" id="home-section">
-
+    
       <div class="container">
         <div class="row align-items-center justify-content-center">
           <div class="col-md-12">
@@ -124,7 +125,9 @@
               <h1 class="text-white font-weight-bold">The Easiest Way To Get Your Dream Job</h1>
               <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cupiditate est, consequuntur perferendis.</p>
             </div>
-            <form method="post" class="search-jobs-form">
+            <div id="searchForm"></div>
+            
+            {% comment %} <form method="post" class="search-jobs-form">
               <div class="row mb-5">
                 <div class="col-12 col-sm-6 col-md-6 col-lg-3 mb-4 mb-lg-0">
                   <input type="text" class="form-control form-control-lg" placeholder="Job title, Company...">
@@ -162,10 +165,11 @@
                   </ul>
                 </div>
               </div>
-            </form>
+            </form> {% endcomment %}
           </div> 
         </div>
-     </div>
+     </div> 
+     
      <a href="#next" class="scroll-button smoothscroll">
        <span class=" icon-keyboard_arrow_down"></span>
      </a>
@@ -214,7 +218,6 @@
       </div>
     </section>
 
-    
 
 <section class="site-section">
   <div class="container">
@@ -224,77 +227,40 @@
         <h2 class="section-title mb-2">43,167 Job Listed</h2>
       </div>
     </div>
-    <div id="app">
+  </div>
+</section>
 
 
-    </div>
-    <div id="comment">
-    </div>
+<div id="app"></div>
 
-    <div id="homePage">
-        
-    </div>
-    {% for forum in forums %}
-      
-      <ul class="job-listings mb-5">
-        <li class="job-listing d-block d-sm-flex pb-3 pb-sm-0 align-items-center">
-          <a href= "{%url 'account:jobSingle' pk=forum.pk %}"></a>
-          <div class="job-listing-logo">
-            <img src="{%static 'frontend/images/job_logo_1.jpg' %}" class="img-fluid">
-          </div>
-
-          <div class="job-listing-about d-sm-flex custom-width w-100 justify-content-between mx-4">
-            <div class="job-listing-position custom-width w-50 mb-3 mb-sm-0">
-              
-              <strong>{{forum.title_ad}}</strong>
-            </div>
-            <div class="job-listing-location mb-3 mb-sm-0 custom-width w-25">
-              <span class="icon-room">{{forum.location}}</span> 
-            </div>
-            <div class="job-listing-meta">
-              <span class="badge badge-danger">{{forum.job_type}}</span>
-            </div>
-          </div>
-          
-        </li>
-      </ul>
-      
-    {% endfor %}
-    
-
-    
-    
-    </span>
-    
-
-    </div>
-    </section>
-    
-   {%include 'forum/pagination.html'%} 
-   
-    <section class="py-5 bg-image overlay-primary fixed overlay" style="background-image: url('images/hero_1.jpg');">
-      <div class="container">
-        <div class="row align-items-center">
-          <div class="col-md-8">
-            <h2 class="text-white">Looking For A Job?</h2>
-            <p class="mb-0 text-white lead">Lorem ipsum dolor sit amet consectetur adipisicing elit tempora adipisci impedit.</p>
-          </div>
-          <div class="col-md-3 ml-auto">
-            <a href="#" class="btn btn-warning btn-block btn-lg">Sign Up</a>
-          </div>
+  
+  
+  
+  {%include 'forum/pagination.html'%} 
+  
+  <section class="py-5 bg-ima ge overlay-primary fixed overlay" style="background-image: url('images/hero_1.jpg');">
+    <div class="container">
+      <div class="row align-items-center">
+        <div class="col-md-8">
+          <h2 class="text-white">Looking For A Job?</h2>
+          <p class="mb-0 text-white lead">Lorem ipsum dolor sit amet consectetur adipisicing elit tempora adipisci impedit.</p>
+        </div>
+        <div class="col-md-3 ml-auto">
+          <a href="#" class="btn btn-warning btn-block btn-lg">Sign Up</a>
         </div>
       </div>
-    </section>
-   
-    
-    <section class="site-section py-4">
-      <div class="container">
+    </div>
+  </section>
   
-        <div class="row align-items-center">
-          <div class="col-12 text-center mt-4 mb-5">
-            <div class="row justify-content-center">
-              <div class="col-md-7">
-                <h2 class="section-title mb-2">Company We've Helped</h2>
+  
+  <section class="site-section py-4">
+    <div class="container">
+
+      <div class="row align-items-center">
+        <div class="col-12 text-center mt-4 mb-5">
+          <div class="row justify-content-center">
+            <div class="col-md-7">
+              <h2 class="section-title mb-2">Company We've Helped</h2>
                 <p class="lead">Porro error reiciendis commodi beatae omnis similique voluptate rerum ipsam fugit mollitia ipsum facilis expedita tempora suscipit iste</p>
               </div>
             </div>
@@ -384,7 +350,7 @@
         </div>
       </div>
     </section>
-    
+   <!--- <div id="header"></div> -->
     
     <footer class="site-footer">
 
@@ -410,7 +376,7 @@
             <ul class="list-unstyled">
               <li><a href="#">About Us</a></li>
               <li><a href="#">Career</a></li>
-              <li><a href="#">Blog</a></li>
+              <li><a href="#">Blog <a/></li>
               <li><a href="#">Resources</a></li>
             </ul>
           </div>
@@ -446,26 +412,22 @@
     </footer>
   
   </div>
-    <script src="{%static 'frontend/main.js' %}"></script>
-    <!-- SCRIPTS -->
-    <script src ="{%static 'frontend/App.js'%}"> </script>
-    <script type ="text/babel" src ="frontend/src/components/Comment.js"> </script>
-
+    <script src="{%static 'frontend/searchForm.js'%}"></script>
+    <script src="{%static 'frontend/main.js'%}"></script>
+    <script src="{%static 'frontend/pagination.js' %}"></script>
     <script src="{%static 'joblisting/js/jquery.min.js' %}"></script>
     <script src="{%static 'joblisting/js/bootstrap.bundle.min.js' %}"></script>
     <script src="{%static 'joblisting/js/isotope.pkgd.min.js' %}"></script>
     <script src="{%static 'joblisting/js/stickyfill.min.js' %}"></script>
     <script src="{%static 'joblisting/js/jquery.fancybox.min.js' %}"></script>
     <script src="{%static 'joblisting/js/jquery.easing.1.3.js' %}"></script>
-    
     <script src="{%static 'joblisting/js/jquery.waypoints.min.js' %}"></script>
     <script src="{%static 'joblisting/js/jquery.animateNumber.min.js' %}"></script>
     <script src="{%static 'joblisting/js/owl.carousel.min.js' %}"></script>
-    
     <script src="{%static 'joblisting/js/bootstrap-select.min.js' %}"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.17.0/babel.min.js"></script>
     <script src="{%static 'joblisting/js/custom.js' %}"></script>
-    
+     
      
   </body>
 </html> 
