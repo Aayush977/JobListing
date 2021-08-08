@@ -10,7 +10,6 @@ from forums.models import Forum
 from django.views.generic.list import ListView
 
 
-
 def index(request):
     forums = Forum.objects.all()
     return render(request, 'jobboard/index.html', {'forums': forums})

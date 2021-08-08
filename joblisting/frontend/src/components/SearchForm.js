@@ -74,7 +74,7 @@ class SearchForm extends Component {
           <ul className="items-bar">
             <li className="search-bar-item">
               <a href="#" className="icon">
-                Rent
+                Rent Plus Home
               </a>
             </li>
             <li className="search-bar-item">
@@ -84,7 +84,7 @@ class SearchForm extends Component {
             </li>
             <li className="search-bar-item">
               <a href="#" className="icon">
-                Jobs
+                Job
               </a>
             </li>
           </ul>

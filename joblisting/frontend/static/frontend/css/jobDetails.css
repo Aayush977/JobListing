@@ -1,0 +1,113 @@
+.like__button {
+  align-items: center;
+  box-sizing: border-box;
+  display: flex;
+  width: 30px;
+  height: auto;
+  flex-direction: column;
+  left: 0;
+  padding: 4px 2px 2px 2px;
+
+  top: 0;
+}
+
+.NumberOfvotes {
+  overflow: hidden;
+  height: 24px;
+  width: 24px;
+  line-height: 24px;
+}
+
+.arrowUpward:hover {
+  color: red;
+}
+
+.arrowDownward:hover {
+  color: red;
+}
+
+.job-listing-position {
+  margin: 0px;
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 22px;
+  padding-top: 8px;
+}
+
+.h4 {
+  font-size: 12px;
+  line-height: 10px;
+  font-family: Montserrat, system-ui, BlinkMacSystemFont, -apple-system,
+    Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans,
+    Helvetica Neue, sans-serif;
+  font-weight: 100;
+}
+
+.icon-room {
+  text-align: center;
+  position: relative;
+  color: rgb(7, 7, 7);
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+}
+
+ul {
+  margin: 0;
+  list-style: none;
+}
+
+.job-listings li {
+  box-shadow: 0 1px 4px 0 rgb(7 29 73 / 10%);
+  border-radius: 6px;
+}
+
+.job-listing-position {
+  display: flex;
+
+  flex-direction: column;
+  min-width: 0;
+  min-height: 5.5rem;
+
+  top: 0;
+}
+.job-listing-position-below {
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+}
+.commentIcon {
+  margin-top: 10px;
+  font-size: 20px;
+  font-weight: 400;
+  height: 10px;
+  line-height: 20px;
+  vertical-align: middle;
+  width: 10px;
+}
+.comments {
+  line-height: 1;
+  text-transform: capitalize;
+  vertical-align: middle;
+}
+
+.job-listing-position strong {
+  display: flex;
+}
+.container :hover {
+}
+.job-listing-user {
+  width: 40px;
+  margin-left: 20px;
+  margin-top: 20px;
+  align-items: center;
+  padding: 4px;
+}
+
+.job-listing-user > a {
+  color: red;
+  position: relative;
+  width: 40px;
+}

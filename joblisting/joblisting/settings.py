@@ -43,8 +43,9 @@ INSTALLED_APPS = [
     'frontend.apps.FrontendConfig',
     'django_react_views',
     'rest_framework',
-    'rest_framework.authtoken'
-    
+    'rest_framework.authtoken',
+    'corsheaders'
+
 ]
 
 MIDDLEWARE = [
@@ -55,6 +56,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'corsheaders.middleware.CorsMiddleware'
 ]
 
 ROOT_URLCONF = 'joblisting.urls'
@@ -62,7 +64,7 @@ ROOT_URLCONF = 'joblisting.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS':[os.path.join(BASE_DIR, 'templates'), 'Templates/jobboard'],
+        'DIRS': [os.path.join(BASE_DIR, 'templates'), 'Templates/jobboard'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -72,7 +74,7 @@ TEMPLATES = [
                 'django.contrib.messages.context_processors.messages',
             ],
         },
-        
+
     },
 ]
 
@@ -136,3 +138,7 @@ REST_FRAMEWORK = {
     ),
 }
 FORM_RENDERER = 'django.forms.renderers.TemplatesSetting'
+CORS_ALLOWED_WHITELIST = [
+    "http://localhost:8080",
+    "http://localhost:3000"
+]

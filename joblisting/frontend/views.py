@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from account import views
+
 # Create your views here.
 
 from forums.models import Forum
@@ -11,9 +11,8 @@ def index(request):
 
 
 def comment(request):
-    return render(request,'jobboard/post-job.html')
+    return render(request, 'jobboard/post-job.html')
 
-def  jobDetail(request):
-    return render(request,'jobboard/job-single.html')
 
-    
+def jobSingle(request):
+    return render(request, 'jobboard/services.html')
