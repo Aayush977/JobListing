@@ -1,0 +1,19 @@
+.center {
+  text-align: center;
+}
+
+a {
+  cursor: pointer;
+}
+
+.pagination {
+  margin-left: 80px;
+
+  color: green;
+}
+
+.pagination a {
+  border: 1px solid #ddd;
+
+  padding: 8px 16px;
+}
