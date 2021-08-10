@@ -10,21 +10,25 @@ from django.views.decorators.csrf import csrf_protect
 from django.views.decorators.csrf import csrf_exempt
 from django.contrib.auth.decorators import login_required
 import json
+
 from django.views.generic.list import ListView
 from rest_framework.views import APIView
-from rest_framework import viewsets
+
 from rest_framework.response import Response
 from forums.serializer import ForumSerializer, CreateForumSerializer, CommentSerializer
-from rest_framework import status
+from rest_framework import status, viewsets, mixins
+from rest_framework.generics import GenericAPIView
 from forums.models import User
 from django.http import Http404
+from django.views.generic.detail import DetailView
+from rest_framework.decorators import api_view, renderer_classes
+from rest_framework.renderers import JSONRenderer, TemplateHTMLRenderer
 
 
-class ForumViewSet(APIView):
-    def get(self, request, format=None):
-        queryset = Forum.objects.all()
-        serializer_class = ForumSerializer(queryset, many=True)
-        return Response(serializer_class.data)
+class ForumViewSet(mixins.ListModelMixin, viewsets.GenericViewSet):
+
+    queryset = Forum.objects.all()
+    serializer_class = ForumSerializer
 
     def post(self, request, format=None):
         serializer = ForumSerializer(data=request.data)
@@ -34,36 +38,20 @@ class ForumViewSet(APIView):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
-class ForumDetailSet(APIView):
-    def get_object(self, pk):
-        try:
-            return Forum.objects.get(pk=pk)
-        except Forum.DoesNotExist:
-            raise Http404
+@api_view(["GET", "PUT"])
+def ForumDetailSet(request, pk):
 
-    def get(self, request, pk):
-        queryset = self.get_object(pk)
-        serializer = ForumSerializer(queryset)
-        return Response(serializer.data)
-
-    def put(self, request, pk):
-        queryset = self.get_object(pk)
-        serializer = ForumSerializer(queryset, data=request.data)
-        if serializer.is_valid():
-            serializer.save()
-            return Response(serializer.data, status=status.HTTP_200_OK)
-        return Response(serializer.error, status=status.HTTP_200_OK)
-
-
-""" def ForumDetails(request):
     try:
-
-        queryset = Forum.objects.get(pk=int(1))
+        job_lists = Forum.objects.filter(pk=pk)
     except Forum.DoesNotExist:
-        return Response(status=status.HTTP_404_NOT_FOUND)
+        return Http404
+
     if request.method == "GET":
-        serializer_class = ForumSerializer(queryset)
-        return Response(serializer_class.data) """
+        serializer = ForumSerializer(job_lists, many=True)
+        return Response(serializer.data, status=status.HTTP_201_CREATED)
+    elif request.method == "PUT":
+        serializer = ForumSerializer(job_lists, data=request.data)
+        return Response(serializer.data, status=status.HTTP_201_CREATED)
 
 
 def post_job(request):
