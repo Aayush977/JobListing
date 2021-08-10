@@ -27,14 +27,9 @@ from django.views.decorators.csrf import csrf_exempt
 
 router = DefaultRouter()
 router.register(r"forums", ForumViewSet, basename="forums")
-# router.register(r"forumLists/<int:pk>", ForumDetailSet, basename="forumsLists")
-
-# router.register(r"forums/([0-9])$", ForumViewSet.as_view())
-# router.register(r'createForums', CreateForumSet, basename='createForm')
-
 urlpatterns = [
     path("admin/", admin.site.urls),
-    path("list/<int:pk>", ForumDetailSet.as_view()),
+    path("list/<int:pk>/", ForumDetailSet),
     path("api/", include(router.urls)),
     path("account/", include("account.urls", namespace="account")),
     path("forum/", include("forums.urls", namespace="forums")),
